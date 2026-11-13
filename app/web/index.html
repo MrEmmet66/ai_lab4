@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ІгроЗвіт — генератор баг-репортів</title>
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/">Генератор баг-репортів</a><span id="health" class="health"><i></i>Перевіряємо модель</span></header>
+  <main>
+    <div class="workspace">
+      <section class="panel input-panel"><div class="panel-heading"><h2>Що сталося у грі?</h2></div>
+        <form id="bug-form"><label for="description">Опис бага</label><textarea id="description" name="description" rows="8" maxlength="2400" placeholder="Наприклад: після завантаження збереження персонаж іноді застрягає в текстурах…" required></textarea><div class="input-foot"><span>Один опис — один дефект</span><span id="counter">0 / 2400</span></div>
+          <div class="examples-label">Спробувати приклад</div><div class="examples"><button type="button" data-example="save">Застрягання персонажа</button><button type="button" data-example="crash">Аварійне завершення</button><button type="button" data-example="ui">Помилка інтерфейсу</button></div>
+          <button id="generate" class="primary" type="submit">Згенерувати баг-репорт</button>
+          <p id="status" class="status" role="status" aria-live="polite"></p><p id="error" class="error" role="alert" hidden></p>
+        </form>
+      </section>
+      <section class="panel output-panel" aria-labelledby="report-heading"><div class="panel-heading output-heading"><h2 id="report-heading">Готовий баг-репорт</h2><span id="report-state" class="state-badge">ОЧІКУЄ НА ОПИС</span></div>
+        <div id="empty" class="empty"><p>Тут з’явиться згенерований звіт.</p></div>
+        <div id="loading" class="empty" hidden><div class="spinner"></div><h3>Генеруємо звіт…</h3><span id="elapsed" class="elapsed">0 с</span></div>
+        <article id="report" hidden></article>
+        <div id="actions" class="actions" hidden><button id="copy" type="button">Копіювати текст</button><button id="json" type="button">Зберегти JSON ↓</button><button id="markdown" type="button">Зберегти Markdown ↓</button></div>
+        <div class="output-footer"><span id="model-name">Qwen3 · локальна модель</span><span id="metrics"></span></div>
+      </section>
+    </div>
+    <details class="guide"><summary>Як читати пріоритет і серйозність</summary><div><p><strong>Пріоритет:</strong> 0 — невідкладний; 1 — високий; 2 — середній; 3 — низький; 4 — мінімальний.</p><p><strong>Серйозність:</strong> 1 — критична; 2 — значна; 3 — помірна; 4 — косметична.</p><p>Пріоритет визначає черговість роботи, серйозність — вплив дефекту на гру. Перевірте звіт перед передаванням команді.</p></div></details>
+  </main>
+</body>
+</html>
